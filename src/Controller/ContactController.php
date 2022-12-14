@@ -51,7 +51,7 @@ class ContactController extends AbstractController
     public function ajaxCampaign(): JsonResponse
     {
         {
-            $statuts = ['FAUX NUMERO', 'NRP/OQP', 'REFUS DE REPONDRE', 'BARRAGE SECRETAIRE', 'RAPPEL', 'PROJET AVEC RAPPEL COMMERCIAL'];
+            $statuts = ['NRP/OQP', 'REFUS DE REPONDRE', 'BARRAGE SECRETAIRE', 'RAPPEL', 'PROJET AVEC RAPPEL COMMERCIAL'];
             $echeances = ['Moins de 3 mois', 'Entre 3 et 6 mois'];
     
             $contacts = $this->em->getRepository(Contact::class)->getCampainContacts();
