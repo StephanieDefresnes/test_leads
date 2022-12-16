@@ -65,18 +65,18 @@ class ImportEditor
             }
             //- Deduplicate contacts;
             $contacts = self::uniqueContact($contacts);
-        }   
-        //- Sort array by idContact key
-        usort($contacts, function ($a, $b) {return $a['idContact'] > $b['idContact'];});
-
-        //- Remove existing contacts
-        foreach( $contacts as $k => $contact ) {
-            foreach( $currents as $curr ) {
-                if ($curr['idContact'] === $contact['idContact']) unset($contacts[$k]);
-            }
-        }        
-        if (empty($contacts)) return ['success' => false, 'msg' => 'Tous les contacts ont déja été importés.'];
-        
+            
+            //- Sort array by idContact key
+            usort($contacts, function ($a, $b) {return $a['idContact'] > $b['idContact'];});
+    
+            //- Remove existing contacts
+            foreach( $contacts as $k => $contact ) {
+                foreach( $currents as $curr ) {
+                    if ($curr['idContact'] === $contact['idContact']) unset($contacts[$k]);
+                }
+            } 
+            if (empty($contacts)) return ['success' => false, 'msg' => 'Tous les contacts ont déja été importés.'];    
+        }         
         return $contacts;
     }
 
@@ -84,7 +84,9 @@ class ImportEditor
      * Insert new contacts
      */
     public function insertContact($data)
-    {
+    {       
+        if (empty($data)) return ['success' => false, 'msg' => 'Aucun contact à importer.'];
+        
         $result = self::checkImport($data);
 
         if ( array_key_exists('success', $result) ) return $result;

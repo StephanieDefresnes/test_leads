@@ -42,16 +42,6 @@ class RequestApi
             'headers'   => $headers,
             'body'      => $body,
         ]);
-
-        try {
-            $response = $this->httpClient->request($method, $url, [
-                'headers'   => $headers,
-                'body'      => $body,
-            ]);
-            return $response;
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
     }
 
 }
